@@ -8,5 +8,9 @@ public class App {
         String OPENAI_API_KEY = properties.getProperty("OPENAI_API_KEY");
         System.out.println(OPENAI_API_KEY);
         
+        ChatGPTClient client = new ChatGPTClient();
+        String pergunta = client.criarPergunta(OPENAI_API_KEY, "Python", "Alternativa", "Muito dificíl", null);
+        System.out.println(pergunta);
+
     }
 }
