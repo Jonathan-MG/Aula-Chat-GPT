@@ -20,6 +20,17 @@ public class ChatGPTClient {
         RequestBody requestBody = RequestBody.create(json, MediaType.parse("application/json"));
         OkHttpClient client = new OkHttpClient();
 
-        return "";
+        Request request = new
+            Request.Builder().url("https://api.openai.com/v1/completions")
+            .addHeader("Content-Type", "application/json")
+            .addHeader("Authorization", "Bearer" + OPENAI_API_KEY)
+            .post(requestBody)
+            .build();
+        Response response = client.newCall(request).execute();
+        RespostaChatGPT resposta = gson.fromJson(response.body().string(), RespostaChatGPT.class);
+
+        String completion = resposta.getChoices().get(0).getText();
+
+        return completion;
     }
 }
